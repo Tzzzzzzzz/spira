@@ -103,9 +103,33 @@ def RouteStraight(p1, p2, layer, path_type='straight', width_type='straight'):
     return R
 
 
-def RoutePath(port1, port2, start_straight, end_straight, path, width, layer):
-    """  """
+# def RoutePath(port1, port2, start_straight, end_straight, path, width, layer):
+#     """  """
 
+#     pts = []
+
+#     p1 = port1.midpoint.to_numpy_array()
+#     p2 = port2.midpoint.to_numpy_array()
+
+#     if port1.orientation == 0:
+#         c1 = p1 + [start_straight, 0]
+#     if port2.orientation == 180:
+#         c2 = p2 - [start_straight, 0]
+
+#     pts.append(p1)
+#     pts.append(c1)
+#     pts.extend(path)
+#     pts.append(c2)
+#     pts.append(p2)
+
+#     path = gdspy.FlexPath(points=pts, width=1, corners='miter')
+#     R = Route(shape=path, p1=port1, p2=port2, layer=RDD.PLAYER.M6.METAL)
+#     return R
+
+def RoutePath(port1, port2, path, width, layer):
+    """  """
+    start_straight=0
+    end_straight=0
     pts = []
 
     p1 = port1.midpoint.to_numpy_array()
@@ -117,15 +141,16 @@ def RoutePath(port1, port2, start_straight, end_straight, path, width, layer):
         c2 = p2 - [start_straight, 0]
 
     pts.append(p1)
-    pts.append(c1)
+    if port1.orientation == 0:
+        pts.append(c1)
     pts.extend(path)
-    pts.append(c2)
+    if port2.orientation == 180:
+        pts.append(c2)
     pts.append(p2)
 
     path = gdspy.FlexPath(points=pts, width=1, corners='miter')
     R = Route(shape=path, p1=port1, p2=port2, layer=RDD.PLAYER.M6.METAL)
     return R
-
 
 def Route90(port1, port2, layer, width=None, corners='miter', bend_radius=1):
     """  """
