@@ -9,7 +9,7 @@ class Jj(spira.Cell):
 
     def create_elements(self, elems):
         
-        elems += spira.Circle(layer=RDD.PLAYER.C1.VIA,box_size=(4.00, 4.00),center=(77.5,63.5))#box_size中的是直径
+        elems += spira.Circle(layer=RDD.PLAYER.C1.VIA,box_size=(4.00, 4.00),center=(77.5,63.5))#box_size中的是直径,发现center()并不能改变圆心坐标，仍是（0，0）
         elems += spira.Circle(layer=RDD.PLAYER.C2.VIA,box_size=(5.00, 5.00),center=(77.5,63.5))
         elems += spira.Circle(layer=RDD.PLAYER.C3.VIA,box_size=(2.00, 2.00),center=(77.5,63.5))
         #elems += spira.Circle(layer=RDD.PLAYER.C3.VIA,box_size=(1.00, 1.00))
